@@ -8,6 +8,8 @@ module.exports = {
 
     const user = await db.find_email(email);
     console.log(req.body);
+    
+
     if (user[0]) return res.status(200).send({ message: "Email already in use" });
 
     const salt = bcrypt.genSaltSync(10);

@@ -7,7 +7,7 @@ module.exports = {
     // console.log(req.body);
 
     const user = await db.find_email(email);
-    console.log(req.body);
+    console.log(req.body,'hit');
     
 
     if (user[0]) return res.status(200).send({ message: "Email already in use" });
@@ -24,10 +24,12 @@ module.exports = {
 
     console.log(req.session.user);
   },
+
   getSession(req, res) {
     if (req.session) {
       res.status(200).send(req.session);
     }
+    console.log(req.session,'hit3')
   },
 
   async login(req, res) {
@@ -41,7 +43,7 @@ module.exports = {
     if (result) {
       delete user[0].hash;
       req.session.user = user[0];
-      console.log(req.session);
+      console.log(req.session,'hit2');
       return res
         .status(200)
         .send({
@@ -52,4 +54,5 @@ module.exports = {
         });
     }
   },
+  
 };

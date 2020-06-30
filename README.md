@@ -68,32 +68,11 @@ authCtrl for authentication of user
 3)Dotenv file to secure port , connection string and session secret data placed in .ignore file to not make public
 
 ### Returns a JSON object containg cookie data,user data,page views and login successes & failures for all user 
-JSON Example :
-{
-    "cookie": {
-        "originalMaxAge": 864000000,
-        "expires": "2020-07-10T02:39:39.530Z",
-        "httpOnly": true,
-        "path": "/"
-    },
-    "user": {
-        "user_id": 6,
-        "email": "ron@gmail.com",
-        "phone": "4567890000",
-        "created_date": "2020-06-30T06:00:00.000Z"
-    },
-    "page_views": 2,
-    "allLoginFailures": [
-        {
-            "count": "3"
-        }
-    ],
-    "loginSuccess": [
-        {
-            "count": "1"
-        }
-    ]
-}
+Steps to obtain JSON object in postman
+1.Register
+2.Login
+3.Get Session
+4.Get Events
 
 
 

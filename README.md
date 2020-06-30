@@ -39,30 +39,62 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This project was bootstrapped with create-react-app 
+###Tech/framework
+--NodeJS
+--PostgreSQL
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+npm installed dependencies
 
-### Code Splitting
+-massive( connect to postgresql database)
+-express
+-express-session
+-dotenv( securing connection string,port,session_secret)
+-bcrypt ( securing user data password ) 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+### Features
 
-### Analyzing the Bundle Size
+Features in this project are user registration with bcrypt
+login, event creation and tracking of user page_views & login successes & failures
+using nodeJS-Express modular pattern with postgreSQl database.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+### Folder structure
 
-### Making a Progressive Web App
+3 main Folders 
+1)Database - With PostgreSQl queries
+2)Server - Contains the massive,express,express-session endpoints  w/ 2 controller files an
+adminCtrl for user data accessibility ( Authorized employees only)
+authCtrl for authentication of user 
+3)Dotenv file to secure port , connection string and session secret data placed in .ignore file to not make public
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+### Returns a JSON object containg cookie data,user data,page views and login successes & failures for all user 
+JSON Example :
+{
+    "cookie": {
+        "originalMaxAge": 864000000,
+        "expires": "2020-07-10T02:39:39.530Z",
+        "httpOnly": true,
+        "path": "/"
+    },
+    "user": {
+        "user_id": 6,
+        "email": "ron@gmail.com",
+        "phone": "4567890000",
+        "created_date": "2020-06-30T06:00:00.000Z"
+    },
+    "page_views": 2,
+    "allLoginFailures": [
+        {
+            "count": "3"
+        }
+    ],
+    "loginSuccess": [
+        {
+            "count": "1"
+        }
+    ]
+}
 
-### Advanced Configuration
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
-### Deployment
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

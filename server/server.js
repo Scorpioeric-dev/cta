@@ -3,16 +3,16 @@ require("dotenv/config");
 const express = require("express");
 const app = express();
 const session = require("express-session");
-const cookieParser = require("cookie-parser");
 const massive = require("massive");
 // Requiring dotenv secured file
 const { port, connection_string, session_secret } = process.env;
 // Authentication controller
 const authCtrl = require("./authController");
+const adminCtrl = require('./adminController')
+//Admin controller
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
 //Middleware
-app.use(cookieParser());
 app.use(express.json());
 app.use(
   session({
@@ -38,11 +38,14 @@ app.get("/", function (req, res) {
     res.send("Welcome!!");
   }
 });
-
+//admin api
+app.get('/admin/getUserData/:id',adminCtrl.getAllEvents)
+app.post('/admin/tracker',adminCtrl.tracker)
 //register,login,& session api endpoints
 app.post("/auth/register", authCtrl.register);
 app.post("/auth/login", authCtrl.login);
 app.get("/auth/session", authCtrl.getSession);
+app.get('/auth/getEvent',authCtrl.getCount)
 app.listen(port, () => {
   console.log(`${port} monkeys in the building`);
 });

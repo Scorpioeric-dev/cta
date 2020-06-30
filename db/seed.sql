@@ -1,39 +1,45 @@
-Drop table tracker;
-CREATE TABLE tracker (
-id SERIAL PRIMARY KEY,
+
+Drop table user_data;
+CREATE TABLE user_data (
+user_id SERIAL PRIMARY KEY,
 email VARCHAR(50),
 hash text,
 Phone VARCHAR(15),
 created date not null default current_date
+constraint "user_data_pk" primary key ("user_id")
 
-);
+)with ( oids=false) 
 
-insert into tracker ( email,hash,phone)
+
+insert into user_data ( email,hash,phone)
 values('rico@gmail.com','hash','1234567890');
 
-select * from tracker
+select * from user_data
 where email = 'suave@gmail.com' and hash = 'hash';
 
-select * from tracker;
+select * from user_data;
 
------are these accurate queries for what they are asking for 
+-----are these accurate queries for what they are asking for ?
 
-drop table Tracker_event;
-create table Tracker_event(
-event_id SERIAL not null,
-created_date date not null,
-created_time time not null,
-constraint "Tracker_events_pk" primary key (event_id)
-) with (
-OIDS = FALSE);
+create table tracker(
+tracker_id serial primary key,
+email varchar(50),
+timestamp timestamp not null,
+event_type varchar(50),
+user_id integer references user_data(user_id));
+
+insert into tracker(email,timestamp,event_type,user_id)
+values('rico@gmail.com','2020-06-28','login failed',1)
+
+select * from tracker
+join user_data on user_data.user_id = tracker.user_id;
 
 
-insert into Tracker_event(created_date,created_time)
-values('2020-06-28','19:10:25-07');
+select * from tracker
+where email = 'rico@gmail.com' and event_type = 'login failed';
 
-select * from Tracker_event
-order by created_date;
+select count(*) from tracker
+where tracker.event_type = 'login failed' and  tracker.user_id = 5;
 
-Select * from Tracker_event
-order by created_time;
-
+select count(*) from tracker
+where tracker.event_type = 'login success' and  tracker.user_id = 5;

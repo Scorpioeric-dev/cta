@@ -1,2 +1,2 @@
-select * from tracker
+select * from user_data
 where email = $1 ; 
